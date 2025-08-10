@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration
 import java.util.*
 
 @Configuration
-@ConfigurationProperties(prefix = "kafka")
+@ConfigurationProperties(prefix = "spring.kafka")
 class KafkaProperties {
     lateinit var bootstrapServers: String
     lateinit var schemaRegistryUrl: String

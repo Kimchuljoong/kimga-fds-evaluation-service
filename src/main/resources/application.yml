@@ -3,7 +3,7 @@ spring:
     name: fdsevaldemo
 
   kafka:
-    topics: fds-topic
+    topic: fds-topic
 
     bootstrapServers: localhost:9092
     schemaRegistryUrl: http://localhost:8081
