@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: fdsevaldemo
+
+  kafka:
+    topic: fds-topic
+
+    bootstrapServers: localhost:9092
+    schemaRegistryUrl: http://localhost:8081
+
+    producer:
+      keySerializer: org.apache.kafka.common.serialization.StringSerializer
+      valueSerializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+
+    consumer:
+      groupId: test-group
+      keyDeserializer: org.apache.kafka.common.serialization.StringDeserializer
+      valueDeserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      autoOffsetReset: earliest
