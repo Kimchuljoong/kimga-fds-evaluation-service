@@ -1,0 +1,34 @@
+{
+  "type": "record",
+  "name": "TransactionEvent",
+  "namespace": "kr.co.kimga.fdsevaldemo.avro",
+  "fields": [
+    {
+      "name": "transactionId",
+      "type": "string"
+    },
+    {
+      "name": "accountId",
+      "type": "string"
+    },
+    {
+      "name": "type",
+      "type": "kr.co.kimga.fdsevaldemo.avro.TransactionEventType"
+    },
+    {
+      "name": "quantity",
+      "type": "long"
+    },
+    {
+      "name": "price",
+      "type": "long"
+    },
+    {
+      "name": "timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    }
+  ]
+}
