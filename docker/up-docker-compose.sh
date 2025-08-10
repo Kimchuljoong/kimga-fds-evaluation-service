@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PROJECT_NAME="fds-docker-compose"
-running_containers=$(docker-compose -p $PROJECT_NAME ps -q)
+running_containers=$(docker-compose -p $PROJECT_NAME ps --filter "status=running" -q)
 
 if [ -n "$running_containers" ]; then
   echo "'$PROJECT_NAME' is already running."
