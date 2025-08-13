@@ -27,6 +27,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.kafka:spring-kafka")
 	implementation("org.springframework.kafka:spring-kafka-streams")
+	implementation("org.apache.kafka:kafka-streams")
 	implementation("org.apache.kafka:kafka-clients:3.7.0")
 	implementation("org.apache.avro:avro:1.11.3")
 	implementation("io.confluent:kafka-streams-avro-serde:7.6.1")

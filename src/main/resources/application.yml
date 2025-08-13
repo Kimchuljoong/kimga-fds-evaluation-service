@@ -9,6 +9,8 @@ spring:
       application-id: fds-avro-streams-app
       properties:
         schema.registry.url: http://localhost:8081
+        default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+        default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
 
 app:
   kafka:
