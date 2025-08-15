@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "TransactionEvent",
-  "namespace": "kr.co.kimga.fdsevaldemo.avro",
+  "namespace": "kr.co.kimga.fdsevaldemo.model",
   "fields": [
     {
       "name": "transactionId",
@@ -13,7 +13,8 @@
     },
     {
       "name": "type",
-      "type": "kr.co.kimga.fdsevaldemo.avro.TransactionEventType"
+      "type": "kr.co.kimga.fdsevaldemo.model.TransactionEventType",
+      "symbols": ["BUY", "SELL"]
     },
     {
       "name": "quantity",

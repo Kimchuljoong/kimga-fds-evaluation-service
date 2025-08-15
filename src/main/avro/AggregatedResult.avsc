@@ -1,0 +1,32 @@
+{
+  "type": "record",
+  "name": "AggregatedResult",
+  "namespace": "kr.co.kimga.fdsevaldemo.model",
+  "fields": [
+    {
+      "name": "accountId",
+      "type": {
+        "type": "string",
+        "avro.java.string": "String"
+      }
+    },
+    {
+      "name": "count",
+      "type": "long"
+    },
+    {
+      "name": "windowStart",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "windowEnd",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    }
+  ]
+}
