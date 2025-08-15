@@ -26,10 +26,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.kafka:spring-kafka")
-	implementation("org.springframework.kafka:spring-kafka-streams")
 	implementation("org.apache.kafka:kafka-streams")
-	implementation("org.apache.kafka:kafka-clients:3.7.0")
-	implementation("org.apache.avro:avro:1.11.3")
+	implementation("org.apache.kafka:kafka-clients")
+	implementation("org.apache.avro:avro")
 	implementation("io.confluent:kafka-streams-avro-serde:7.6.1")
 	implementation("io.confluent:kafka-avro-serializer:7.6.1")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -37,6 +36,8 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	implementation("com.googlecode.aviator:aviator:5.4.3")
+	compileOnly("org.projectlombok:lombok")
+	annotationProcessor("org.projectlombok:lombok")
 
 	implementation("io.micrometer:micrometer-registry-prometheus")
 
