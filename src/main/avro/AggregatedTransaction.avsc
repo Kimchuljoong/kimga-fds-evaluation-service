@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "name": "AggregatedTransaction",
+  "namespace": "kr.co.kimga.fdsevaldemo.model",
+  "fields": [
+    {"name": "accountId", "type": "string"},
+    {
+      "name": "type",
+      "type": "kr.co.kimga.fdsevaldemo.model.TransactionEventType",
+      "symbols": ["BUY", "SELL"]
+    },
+    { "name": "priceSum", "type": "long" },
+    { "name": "quantitySum", "type": "long" }
+  ]
+}
