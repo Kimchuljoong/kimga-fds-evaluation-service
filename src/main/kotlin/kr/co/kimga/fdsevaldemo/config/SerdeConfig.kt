@@ -16,5 +16,5 @@ class SerdeConfig(@Value("\${schema.registry.url}") private val schemaRegistryUr
         return serde
     }
 
-    fun stringSerde() = Serdes.String()
+    fun stringSerde(): Serde<String> = Serdes.String()
 }

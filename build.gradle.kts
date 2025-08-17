@@ -44,6 +44,8 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
+	testImplementation("org.springframework.kafka:spring-kafka-test")
+
 }
 
 avro {
@@ -55,7 +57,7 @@ tasks.withType<GenerateAvroJavaTask> {
 	include("**/*.avsc")
 }
 
-val generatedAvroDir = layout.buildDirectory.dir("generated-main-avro-java").get().asFile.absolutePath
+val generatedAvroDir = layout.buildDirectory.dir("generated-main-avro-java")
 
 sourceSets {
 	val main by getting {
