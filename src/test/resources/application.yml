@@ -1,0 +1,38 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: fdsevaldemo
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    schema-registry-url: ${schema.registry.url}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      properties:
+        schema.registry.url: ${schema.registry.url}
+    consumer:
+      group-id: fds-consumer-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      properties:
+        schema.registry.url: ${spring.kafka.schema-registry-url}
+        specific.avro.reader: true
+      auto-offset-reset: earliest
+    streams:
+      application-id: fds-avro-streams-app
+      properties:
+        default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+        default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+        schema.registry.url: ${schema.registry.url}
+app:
+  kafka:
+    topics:
+      transactions: transactions
+      alerts: fds-alerts
+
+schema:
+  registry:
+    url: http://localhost:8081
