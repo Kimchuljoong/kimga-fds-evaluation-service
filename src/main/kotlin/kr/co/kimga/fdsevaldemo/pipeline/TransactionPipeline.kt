@@ -18,11 +18,9 @@ class TransactionPipeline(
 ) : EvaluatePipeline {
 
     override fun build(builder: StreamsBuilder) {
-        // 1. Avro Serde 설정
         val valueSerde = serdeConfig.specificAvroSerde<TransactionEvent>()
         val keySerde = serdeConfig.stringSerde()
 
-        // 2. 스트림 생성 및 토폴로지 구성
         builder.stream(
             kafkaProperties.transactions,
             Consumed.with(keySerde, valueSerde)
