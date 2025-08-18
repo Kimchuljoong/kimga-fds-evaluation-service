@@ -1,6 +1,5 @@
 package kr.co.kimga.fdsevaldemo.service
 
-import kr.co.kimga.fdsevaldemo.model.AggregatedResult
 import kr.co.kimga.fdsevaldemo.model.AggregatedTransaction
 import kr.co.kimga.fdsevaldemo.model.TransactionEvent
 import kr.co.kimga.fdsevaldemo.repository.RuleRepository

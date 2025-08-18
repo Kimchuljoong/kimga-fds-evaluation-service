@@ -9,7 +9,7 @@ import org.springframework.kafka.core.KafkaAdmin
 
 @Configuration
 class KafkaInitConfig(
-    private val kafkaProperties: KafkaProperties,
+    private val kafkaProperties: KafkaTopicsProperties,
     @Value("\${spring.kafka.bootstrap-servers}")
     private val bootstrapServers: String
 ) {
@@ -32,9 +32,18 @@ class KafkaInitConfig(
     }
 
     @Bean
-    fun alertsTopic(): NewTopic {
+    fun staticsAlertTopic(): NewTopic {
         return NewTopic(
-            kafkaProperties.alerts,
+            kafkaProperties.staticsAlerts,
+            1,
+            1.toShort()
+        )
+    }
+
+    @Bean
+    fun aggregateAlertTopic(): NewTopic {
+        return NewTopic(
+            kafkaProperties.aggregateAlerts,
             1,
             1.toShort()
         )

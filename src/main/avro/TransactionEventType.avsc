@@ -1,6 +1,0 @@
-{
-  "type": "enum",
-  "name": "TransactionEventType",
-  "namespace": "kr.co.kimga.fdsevaldemo.model",
-  "symbols": ["BUY", "SELL"]
-}
