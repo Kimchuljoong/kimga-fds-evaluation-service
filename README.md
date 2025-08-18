@@ -5,7 +5,7 @@
 
 ---
 
-## 프로젝트 구조
+## **프로젝트 구조**
 - **Rule**: 거래를 평가하는 규칙. 인터페이스로 정의되어 있으며, 필요에 따라 구현 가능
 - **Pipeline**: Rule을 적용하고 평가 흐름을 구성하는 인터페이스. 구현을 통해 파이프라인 구성 가능
 - **RuleEvaluator**: 거래 이벤트를 받아 등록된 Rule을 평가하는 핵심 컴포넌트. Rule에 저촉되는 거래가 있으면 알림 토픽으로 이벤트 전달
@@ -13,7 +13,7 @@
 ![img.png](img.png)
 ---
 
-## 서비스 실행
+## **서비스 실행**
 ### Kafka 실행
 Docker를 이용하여 Kafka와 Zookeeper를 실행하며, 시작/종료용 `sh` 스크립트 제공
 
@@ -37,7 +37,7 @@ Spring Boot 애플리케이션을 실행
 
 ---
 
-## 테스트 거래 전송
+## **테스트 거래 전송**
 ```bash
 # docker kafka 컨테이너 내 Bash 접속
 docker exec -it fds-kafka bash
@@ -51,7 +51,7 @@ kafka-console-producer --bootstrap-server localhost:9092 --topic transactions
 
 ---
 
-## 확장 포인트
+## **확장 포인트**
 1. API를 통해 Rule 등록 및 조회 기능 추가
 2. RuleEvaluator Open-Closed 원칙에 위배되지 않도록 변경
 
