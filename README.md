@@ -1,7 +1,11 @@
 # FDS Demo (Fraud Detection System Demo)
 
-이 프로젝트는 **Kafka Streams** 기반의 간단한 **Fraud Detection System(FDS) 데모**입니다.  
-실시간으로 들어오는 **거래(Transaction)** 이벤트를 **정해진 Rule**로 평가하여, Rule에 저촉되는 경우 이를 **알림(Alerts) 토픽**으로 전송합니다.
+이 프로젝트는 **Kafka Streams** 기반의 간단한 **Fraud Detection System(FDS) 데모**입니다
+실시간으로 들어오는 **거래(Transaction)** 이벤트를 **정해진 Rule**로 평가하여, Rule에 저촉되는 거래에 대해 **알림(Alerts) 토픽**으로 전송 합니다
+
+---
+## 프로세스 흐름
+![img.png](img.png)
 
 ---
 
@@ -10,7 +14,7 @@
 - **Pipeline**: Rule을 적용하고 평가 흐름을 구성하는 인터페이스. 구현을 통해 파이프라인 구성 가능
 - **RuleEvaluator**: 거래 이벤트를 받아 등록된 Rule을 평가하는 핵심 컴포넌트. Rule에 저촉되는 거래가 있으면 알림 토픽으로 이벤트 전달
 - **Kafka Streams**: 거래 이벤트를 스트리밍 처리하여 Rule 평가 파이프라인과 알림 토픽으로 연결
-![img.png](img.png)
+
 ---
 
 ## **서비스 실행**
