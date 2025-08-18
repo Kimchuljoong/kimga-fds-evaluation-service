@@ -1,6 +1,7 @@
 package kr.co.kimga.fdsevaldemo.service
 
 import kr.co.kimga.fdsevaldemo.model.AggregatedResult
+import kr.co.kimga.fdsevaldemo.model.AggregatedTransaction
 import kr.co.kimga.fdsevaldemo.model.TransactionEvent
 import kr.co.kimga.fdsevaldemo.repository.RuleRepository
 import lombok.RequiredArgsConstructor
@@ -14,6 +15,6 @@ class RuleEvaluator(
     fun matchesTransaction(event: TransactionEvent) =
         ruleRepository.loadTransactionRules().any { it.evaluate(event) }
 
-    fun matchesAggregation(result: AggregatedResult) =
+    fun matchesAggregation(result: AggregatedTransaction) =
         ruleRepository.loadAggregationRules().any { it.evaluate(result) }
 }
