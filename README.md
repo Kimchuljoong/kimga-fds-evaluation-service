@@ -37,7 +37,9 @@ Spring Boot 애플리케이션을 실행
 
 ---
 
-## **테스트 거래 전송**
+## **테스트 거래 전송/확인**
+
+### 거래 전송
 ```bash
 # docker kafka 컨테이너 내 Bash 접속
 docker exec -it fds-kafka bash
@@ -47,6 +49,15 @@ kafka-console-producer --bootstrap-server localhost:9092 --topic transactions
 
 # 테스트 거래 전송
 {"transactionId": "tx0002", "accountId": "account0001", "type": "SELL", "quantity": 2, "price": 10000, "timestamp": 1692364860000}
+```
+### 이상 거래 알림 데이터 확인
+```bash
+# docker kafka 컨테이너 내 Bash 접속
+docker exec -it fds-kafka bash
+
+# kafka-console-consumer 접속
+kafka-console-consumer --bootstrap-server localhost:9092 --topic fds-alert-statics --from-beginning
+kafka-console-consumer --bootstrap-server localhost:9092 --topic fds-alert-aggregate --from-beginning
 ```
 
 ---
