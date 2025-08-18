@@ -1,37 +1,63 @@
 package kr.co.kimga.fdsevaldemo.config
 
+import kr.co.kimga.fdsevaldemo.pipeline.AggregatePipeline
+import kr.co.kimga.fdsevaldemo.pipeline.StaticsPipeline
+import org.apache.kafka.streams.KafkaStreams
 import org.apache.kafka.streams.StreamsBuilder
 import org.apache.kafka.streams.StreamsConfig
+import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import java.util.*
 
 @Configuration
+@EnableConfigurationProperties(KafkaStreamsProperties::class)
 class KafkaStreamsConfig(
-    val streamsProps: KafkaStreamsProperties
+    @Qualifier("kafkaStreamsProperties") val kafkaStreamsProperties: KafkaStreamsProperties,
 ) {
 
-    @Bean(name = ["transactionStreamsConfig"])
-    fun transactionStreamsConfig(): StreamsConfig {
-        val props = Properties().apply {
-            putAll(streamsProps.transaction.properties)
-            put(StreamsConfig.APPLICATION_ID_CONFIG, streamsProps.transaction.applicationId)
-        }
-        return StreamsConfig(props)
-    }
-
-    @Bean(name = ["aggregateStreamsConfig"])
+    @Bean
     fun aggregateStreamsConfig(): StreamsConfig {
         val props = Properties().apply {
-            putAll(streamsProps.aggregate.properties)
-            put(StreamsConfig.APPLICATION_ID_CONFIG, streamsProps.aggregate.applicationId)
+            putAll(kafkaStreamsProperties.aggregate.properties)
+            put(StreamsConfig.APPLICATION_ID_CONFIG, kafkaStreamsProperties.aggregate.applicationId)
         }
         return StreamsConfig(props)
     }
 
-    @Bean(name = ["transactionBuilder"])
-    fun transactionBuilder(): StreamsBuilder = StreamsBuilder()
+    @Bean
+    fun staticsStreamsConfig(): StreamsConfig {
+        val props = Properties().apply {
+            putAll(kafkaStreamsProperties.statics.properties)
+            put(StreamsConfig.APPLICATION_ID_CONFIG, kafkaStreamsProperties.statics.applicationId)
+        }
+        return StreamsConfig(props)
+    }
 
-    @Bean(name = ["aggregateBuilder"])
+    @Bean
     fun aggregateBuilder(): StreamsBuilder = StreamsBuilder()
+
+    @Bean
+    fun staticsBuilder(): StreamsBuilder = StreamsBuilder()
+
+    @Bean
+    fun aggregateKafkaStreams(
+        aggregatePipeline: AggregatePipeline,
+        @Qualifier("aggregateBuilder") builder: StreamsBuilder,
+        @Qualifier("aggregateStreamsConfig") streamsConfig: StreamsConfig
+    ): KafkaStreams {
+        aggregatePipeline.build(builder)
+        return KafkaStreams(builder.build(), streamsConfig).apply { start() }
+    }
+
+    @Bean
+    fun staticsKafkaStreams(
+        staticsPipeline: StaticsPipeline,
+        @Qualifier("staticsBuilder") builder: StreamsBuilder,
+        @Qualifier("staticsStreamsConfig") streamsConfig: StreamsConfig
+    ): KafkaStreams {
+        staticsPipeline.build(builder)
+        return KafkaStreams(builder.build(), streamsConfig).apply { start() }
+    }
 }

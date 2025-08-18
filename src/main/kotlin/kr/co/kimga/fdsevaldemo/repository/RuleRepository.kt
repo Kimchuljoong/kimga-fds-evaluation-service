@@ -11,13 +11,18 @@ class RuleRepository {
             AviatorStaticRule(
                 name = "test-rule",
                 description = "Test rule",
-                expression = "true"
+                expression = "price > 10000"
             )
         )
     }
 
     fun loadAggregationRules(): List<AviatorAggregateRule> {
         return listOf(
+            AviatorAggregateRule(
+                name = "test-aggregate-rule",
+                description = "Test Aggregate rule",
+                expression = "priceSum >= 15000 && quantitySum > 3"
+            )
         )
     }
 }

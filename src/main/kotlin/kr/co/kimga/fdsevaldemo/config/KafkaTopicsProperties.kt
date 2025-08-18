@@ -7,5 +7,6 @@ import org.springframework.context.annotation.Configuration
 @ConfigurationProperties(prefix = "app.kafka.topics")
 class KafkaTopicsProperties {
     lateinit var transactions: String
-    lateinit var alerts: String
+    lateinit var aggregateAlerts: String
+    lateinit var staticsAlerts: String
 }

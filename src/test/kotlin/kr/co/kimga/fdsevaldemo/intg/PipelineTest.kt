@@ -1,13 +1,9 @@
 package kr.co.kimga.fdsevaldemo.intg
 
-import io.confluent.kafka.serializers.AbstractKafkaSchemaSerDeConfig
-import io.confluent.kafka.serializers.KafkaAvroDeserializer
+import kr.co.kimga.fdsevaldemo.model.StaticTransaction
 import kr.co.kimga.fdsevaldemo.model.TransactionEvent
 import kr.co.kimga.fdsevaldemo.model.TransactionEventType
-import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.clients.consumer.ConsumerRecord
-import org.apache.kafka.clients.consumer.KafkaConsumer
-import org.apache.kafka.common.serialization.StringDeserializer
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -15,17 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.kafka.core.ConsumerFactory
 import org.springframework.kafka.core.KafkaTemplate
-import org.springframework.kafka.test.EmbeddedKafkaBroker
 import org.springframework.kafka.test.context.EmbeddedKafka
 import org.springframework.kafka.test.utils.KafkaTestUtils
 import java.time.Duration
 import java.time.Instant
 
 @SpringBootTest
-@EmbeddedKafka(partitions = 1, topics = ["transactions", "fds-alerts"])
+@EmbeddedKafka(partitions = 1, topics = ["transactions", "fds-alerts-statics"])
 class PipelineTest(
     @Autowired private val kafkaTemplate: KafkaTemplate<String, TransactionEvent>,
-    @Autowired private val kafkaConsumerFactory: ConsumerFactory<String, TransactionEvent>
+    @Autowired private val kafkaConsumerFactory: ConsumerFactory<String, StaticTransaction>
 ) {
 
     @Test
@@ -40,12 +35,12 @@ class PipelineTest(
 
         // then
         val consumer = kafkaConsumerFactory.createConsumer()
-        consumer.subscribe(listOf("fds-alerts"))
+        consumer.subscribe(listOf("fds-alerts-statics"))
 
-        val record: ConsumerRecord<String, TransactionEvent> =
-            KafkaTestUtils.getSingleRecord(consumer, "fds-alerts", Duration.ofSeconds(3))
+        val record: ConsumerRecord<String, StaticTransaction> =
+            KafkaTestUtils.getSingleRecord(consumer, "fds-alerts-statics", Duration.ofSeconds(3))
 
-        assertEquals(transactionEvent.transactionId, record.value().transactionId)
+        assertEquals(transactionEvent.accountId, record.value().accountId)
 
         consumer.close()
 
@@ -56,7 +51,7 @@ class PipelineTest(
         "account0001",
         TransactionEventType.BUY,
         1L,
-        10_000L,
+        10_001L,
         Instant.now(),
     )
 }

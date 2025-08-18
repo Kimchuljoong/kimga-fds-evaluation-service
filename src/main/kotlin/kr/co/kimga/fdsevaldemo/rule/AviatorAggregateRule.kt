@@ -10,6 +10,9 @@ class AviatorAggregateRule(
 ) : Rule<AggregatedTransaction> {
     override fun evaluate(event: AggregatedTransaction): Boolean {
         val context = toContext(event)
+        println("check1")
+        println(event)
+        println(AviatorEvaluator.execute(expression, context) as? Boolean ?: false)
         return AviatorEvaluator.execute(expression, context) as? Boolean ?: false
     }
 
