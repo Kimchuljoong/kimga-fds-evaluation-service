@@ -69,5 +69,7 @@ kafka-console-consumer --bootstrap-server localhost:9092 --topic fds-alert-aggre
 ## **확장 포인트**
 1. API를 통해 Rule 등록 및 조회 기능 추가
 2. RuleEvaluator Open-Closed 원칙에 위배되지 않도록 변경
+3. 테스트 코드 확대
+4. APM 연동
 
 ---
